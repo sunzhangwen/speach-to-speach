@@ -1,0 +1,12 @@
+{
+  "lmStudio": {
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "model": "qwen/qwen3-4b-2507"
+  },
+  "backend": {
+    "port": 8765
+  },
+  "frontend": {
+    "port": 7860
+  }
+}

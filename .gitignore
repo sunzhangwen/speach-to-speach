@@ -1,0 +1,49 @@
+# ===== 环境与依赖 =====
+venv/
+.venv/
+env/
+.env
+.env.*
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ===== AI 模型与缓存 =====
+models/
+.cache/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# ===== 日志 =====
+*.log
+logs/
+
+# ===== IDE 与编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===== 开发工具 =====
+.mimocode/
+
+# ===== 本地部署脚本 =====
+deploy_replica.py
+
+# ===== 临时文件 =====
+*.tmp
+*.bak
+*.cache
