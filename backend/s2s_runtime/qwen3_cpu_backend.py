@@ -129,9 +129,9 @@ def install_cpu_backend_patch(handler_class: type | None = None) -> None:
     original_setup = handler_class._setup_faster
     handler_class._project_original_setup_faster = original_setup
 
-    def setup_faster(self: Any, model_name: str, dtype: Any, attn_implementation: str) -> None:
+    def setup_faster(self: Any, model_name: str, dtype: Any, attn_implementation: str, backend: str = "ggml") -> None:
         if self.device != "cpu":
-            return original_setup(self, model_name, dtype, attn_implementation)
+            return original_setup(self, model_name, dtype, attn_implementation, backend=backend)
 
         logger.info("Loading Qwen3-TTS through native qwen-tts CPU backend")
         self.dtype = getattr(torch, dtype) if isinstance(dtype, str) else dtype

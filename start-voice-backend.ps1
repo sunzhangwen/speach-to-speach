@@ -149,7 +149,11 @@ $arguments = @(
     "--qwen3_tts_device", $RuntimeDevice
     "--qwen3_tts_dtype", $TtsDtype
     "--qwen3_tts_language", "zh"
+    "--qwen3_tts_backend", "torch"
     "--enable_live_transcription"
+    "--min_silence_ms", "1200"
+    "--speculative_reopen_ms", "2500"
+    "--unanswered_reopen_ms", "8000"
 )
 
 if ($SttBackend -eq "faster-whisper") {
