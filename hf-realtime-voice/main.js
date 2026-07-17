@@ -56,7 +56,7 @@ const STORAGE_KEYS = {
 // where the gate cuts on the same scale as the level bar.
 const GATE_OFF_DB = -66; // slider minimum = off / bottom of the meter axis
 const GATE_MAX_DB = -3; // slider maximum = most aggressive / top of the meter axis
-const GATE_DEFAULT_DB = -50; // first-run default: a gentle gate, enabled
+const GATE_DEFAULT_DB = -66; // first-run default: off (pure passthrough)
 
 /** @param {number} thresholdDb @returns {import("./ws/s2s-ws-client.js").NoiseGate} */
 function gateParams(thresholdDb) {
