@@ -6,7 +6,7 @@ from typing import Any
 
 from rich.console import Console
 
-from speech_to_speech.pipeline.messages import Transcription
+from speech_to_speech.pipeline.messages import PartialTranscription, Transcription
 from speech_to_speech.STT.whisper_stt_handler import SUPPORTED_LANGUAGES
 
 logger = logging.getLogger(__name__)
@@ -61,17 +61,26 @@ def install_whisper_short_output_patch(handler_class: type | None = None) -> Non
 
         language_code = language_code or fallback_language or "en"
         self.last_language = language_code
-        console.print(f"[yellow]USER: {pred_text}")
 
         if self.start_language == "auto":
             language_code += "-auto"
 
-        yield Transcription(
-            text=pred_text,
-            language_code=language_code,
-            turn_id=vad_audio.turn_id,
-            turn_revision=vad_audio.turn_revision,
-            speech_stopped_at_s=vad_audio.created_at_s,
-        )
+        mode = getattr(vad_audio, "mode", None)
+        if mode == "progressive":
+            console.print(f"[cyan]USER (partial): {pred_text}")
+            yield PartialTranscription(
+                text=pred_text,
+                turn_id=vad_audio.turn_id,
+                turn_revision=vad_audio.turn_revision,
+            )
+        else:
+            console.print(f"[yellow]USER: {pred_text}")
+            yield Transcription(
+                text=pred_text,
+                language_code=language_code,
+                turn_id=vad_audio.turn_id,
+                turn_revision=vad_audio.turn_revision,
+                speech_stopped_at_s=vad_audio.created_at_s,
+            )
 
     handler_class.process = process

@@ -151,10 +151,12 @@ $arguments = @(
     "--qwen3_tts_language", "zh"
     "--qwen3_tts_backend", "torch"
     "--enable_live_transcription"
-    "--thresh", "0.35"
-    "--min_silence_ms", "1200"
-    "--speculative_reopen_ms", "2500"
-    "--unanswered_reopen_ms", "8000"
+    "--thresh", "0.2"
+    "--min_silence_ms", "1000"
+    "--speech_pad_ms", "500"
+    "--speculative_reopen_ms", "4000"
+    "--unanswered_reopen_ms", "12000"
+    "--log_level", "info"
 )
 
 if ($SttBackend -eq "faster-whisper") {
